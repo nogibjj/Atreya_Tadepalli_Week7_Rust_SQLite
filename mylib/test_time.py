@@ -12,5 +12,5 @@ def add_numbers(x,y):
 start=time.perf_counter()
 sum=add_numbers(1,100000)
 end=time.perf_counter()
-print(f"The sum of these numbers is {sum}")
+print(f"The sum of all of these numbers is {sum}")
 print(f"The time taken is {10**6*(end - start)} microseconds")

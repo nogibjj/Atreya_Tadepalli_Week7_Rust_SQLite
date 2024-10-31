@@ -87,7 +87,7 @@ pub fn update_table(table_name: &str, set_clause: &str, condition: &str) -> Resu
     let conn = Connection::open("baseball.db")?;
     let update_query = format!("UPDATE {} SET {} WHERE {}", table_name, set_clause, condition);
     let affected_rows = conn.execute(&update_query, [])?;
-    println!("Successfully updated {} row(s) in table '{}'.", affected_rows, table_name);
+    println!("Successfully updated {} row(s) in the table '{}'.", affected_rows, table_name);
     Ok(())
 }
 
@@ -96,6 +96,7 @@ pub fn drop_table(table_name: &str) -> Result<(), Box<dyn Error>> {
     let drop_query = format!("DROP TABLE IF EXISTS {}", table_name);
     conn.execute(&drop_query, [])?;
     println!("Table '{}' dropped successfully.", table_name);
+    // / Hi
     Ok(())
 }
 

@@ -137,8 +137,8 @@ mod tests {
     #[test]
     fn test_drop_table() -> Result<()> {
         let conn = Connection::open_in_memory()?;
-        create_table(&conn, "test_table")?;
-        drop_table(&conn, "test_table")?;
+        create_table("test_table")?;
+        drop_table("test_table")?;
         let mut stmt = conn
             .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
         let mut rows = stmt.query([])?;

@@ -109,7 +109,7 @@ mod tests {
     // use std::io::Write;
 
     #[test]
-    fn test_create_table() -> Result<()Box<dyn Error>> {
+    fn test_create_table() -> Result<(),Box<dyn Error>> {
         let conn = Connection::open_in_memory()?;
         create_table("test_table")?;
         let mut stmt = conn

@@ -109,9 +109,9 @@ mod tests {
     // use std::io::Write;
 
     #[test]
-    fn test_create_table() -> Result<()> {
+    fn test_create_table() -> Result<()Box<dyn Error>> {
         let conn = Connection::open_in_memory()?;
-        create_table(&conn, "test_table")?;
+        create_table("test_table")?;
         let mut stmt = conn
             .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
         let mut rows = stmt.query([])?;
@@ -122,12 +122,12 @@ mod tests {
     #[test]
     fn test_load_csv() -> Result<(), Box<dyn Error>> {
         let conn = Connection::open_in_memory()?;
-        create_table(&conn, "test_table")?;
-        load_csv(&conn, "test_table", "../data/MLB.csv")?;
+        create_table("test_table")?;
+        load_csv("test_table", "../data/MLB.csv")?;
 
         // Check that the table loaded some rows
         let mut stmt = conn.prepare("SELECT COUNT(*) FROM test_table")?;
-        let count: i32 = stmt.query_row([], |row| row.get(0));
+        let count: i32 = stmt.query_row([], |row| row.get(0))?;
         assert!(count > 0, "No rows were entered into the test table");
 
         Ok(())

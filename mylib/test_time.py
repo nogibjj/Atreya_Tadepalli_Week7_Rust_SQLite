@@ -1,10 +1,10 @@
 import time
 
 def add_numbers(x,y):
-    num_1=x
+    num_12=x
     num2=y
     z=1
-    for i in range(num_1,num2+1,1):
+    for i in range(num_12,num2+1,1):
         z=z+i
     return z
 

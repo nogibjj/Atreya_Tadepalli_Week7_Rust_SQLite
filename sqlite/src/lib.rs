@@ -114,7 +114,7 @@ mod tests {
         create_table("test_table")?;
         let mut stmt = conn.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
         let mut rows = stmt.query([])?;
-        assert!(rows.next().unwrap().is_some());
+        assert!(rows.next().expect("Failed to retrieve row").is_some());
         Ok(())
     }
 
@@ -140,7 +140,7 @@ mod tests {
         drop_table("test_table")?;
         let mut stmt = conn.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
         let mut rows = stmt.query([])?;
-        assert!(rows.next().unwrap().is_none());
+        assert!(rows.next().expect("Failed to retrieve row").is_none());
         Ok(())
     }
 

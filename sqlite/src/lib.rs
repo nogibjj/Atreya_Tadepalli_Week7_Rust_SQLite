@@ -112,8 +112,7 @@ mod tests {
     fn test_create_table() -> Result<(),Box<dyn Error>> {
         let conn = Connection::open_in_memory()?;
         create_table("test_table")?;
-        let mut stmt = conn
-            .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
+        let mut stmt = conn.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
         let mut rows = stmt.query([])?;
         assert!(rows.next().unwrap().is_some());
         Ok(())
@@ -123,7 +122,7 @@ mod tests {
     fn test_load_csv() -> Result<(), Box<dyn Error>> {
         let conn = Connection::open_in_memory()?;
         create_table("test_table")?;
-        load_csv("test_table", "../data/MLB.csv")?;
+        load_csv("test_table", "data/mlb-test.csv")?;
 
         // Check that the table loaded some rows
         let mut stmt = conn.prepare("SELECT COUNT(*) FROM test_table")?;
@@ -139,8 +138,7 @@ mod tests {
         let conn = Connection::open_in_memory()?;
         create_table("test_table")?;
         drop_table("test_table")?;
-        let mut stmt = conn
-            .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
+        let mut stmt = conn.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='test_table'")?;
         let mut rows = stmt.query([])?;
         assert!(rows.next().unwrap().is_none());
         Ok(())
